@@ -24,7 +24,10 @@ class PatientCreate(BaseModel):
 
 @app.get("/", tags=["General"])
 def home():
-    return {"message": "Welcome to MediQueue", "docs": "/docs"}
+    return {
+    "message": "Welcome to MediQueue - Smart Hospital Queue Manager",
+    "docs": "/docs"
+}
 
 
 @app.get("/health", tags=["General"])
