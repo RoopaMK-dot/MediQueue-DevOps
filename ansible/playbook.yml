@@ -1,0 +1,5 @@
+- name: Configure MediQueue application host
+  hosts: mediqueue_servers
+  become: true
+  roles:
+    - mediqueue
