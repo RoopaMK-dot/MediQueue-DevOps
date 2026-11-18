@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -20,7 +19,7 @@ pipeline {
             steps {
                 bat '''
                 if exist requirements.txt (
-                    bat python -m pip install -r requirements.txt
+                    python -m pip install -r requirements.txt
                 ) else (
                     echo requirements.txt not found - skipping
                 )
