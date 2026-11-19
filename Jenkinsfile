@@ -1,4 +1,3 @@
-?variant="document" title="Updated Jenkinsfile" id="58321"}
 pipeline {
     agent any
 
@@ -21,7 +20,6 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat '"%PYTHON%" -m pip install --upgrade pip'
                 bat '"%PYTHON%" -m pip install -r requirements.txt'
                 bat '"%PYTHON%" -m pip install pytest'
             }
@@ -44,7 +42,6 @@ pipeline {
         success {
             echo 'MediQueue Pipeline Successful!'
         }
-
         failure {
             echo 'MediQueue Pipeline Failed!'
         }
