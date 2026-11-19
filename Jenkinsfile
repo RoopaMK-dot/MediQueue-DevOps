@@ -1,35 +1,41 @@
+?variant="document" title="Updated Jenkinsfile" id="58321"}
 pipeline {
     agent any
 
-    stages {
+    environment {
+        PYTHON = 'C:/Users/ROOPA/AppData/Local/Programs/Python/Python312/python.exe'
+    }
 
+    stages {
         stage('Checkout') {
             steps {
-                echo 'MediQueue source code checked out'
+                echo 'MediQueue source code checked out successfully'
             }
         }
 
         stage('Check Python') {
             steps {
-                bat 'python --version'
+                bat '"%PYTHON%" --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat '''
-                if exist requirements.txt (
-                    python -m pip install -r requirements.txt
-                ) else (
-                    echo requirements.txt not found - skipping
-                )
-                '''
+                bat '"%PYTHON%" -m pip install --upgrade pip'
+                bat '"%PYTHON%" -m pip install -r requirements.txt'
+                bat '"%PYTHON%" -m pip install pytest'
             }
         }
 
         stage('Validate Application') {
             steps {
-                bat 'python -m compileall app'
+                bat '"%PYTHON%" -m compileall app'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat '"%PYTHON%" -m pytest -v'
             }
         }
     }
@@ -38,6 +44,7 @@ pipeline {
         success {
             echo 'MediQueue Pipeline Successful!'
         }
+
         failure {
             echo 'MediQueue Pipeline Failed!'
         }
